@@ -1,17 +1,23 @@
+#include <string>
 #define INSTRUCTIONMEMORY_H
 #if defined INSTRUCTIONMEMORY_H
 
 class IM
 {
-private:
+protected:
 	int address;
-	int Locations[1024] = { 0 };
+	int InstructionCount;
+	std::string Locations[1024];
 
 
 public:
+	IM();
+	void LoadToInstructionMemory(std::string);
 	//LoadToInstructionMemory
 	//ReadFromInstructionMemory
 	//AccessToInstructionMemory
+	void DisplayIM();
+	~IM();
 };
 
 #endif

@@ -11,7 +11,7 @@ struct variable
 
 class DM
 {
-private:
+protected:
 	int address;
 	variable MemoryBank[1024];
 

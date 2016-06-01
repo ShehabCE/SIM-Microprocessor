@@ -1,19 +1,25 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <regex>
+
+#include "InstructionMemory.h"
+#include "DataMemory.h"
 
 #define SIM_MICROPROCESSOR_H
 #if defined SIM_MICROPROCESSOR_H
 
 
-class SIM
+class SIM : public IM, public DM
 {
-private:
 	//int *InstructionMemory = new int[1024];
 	//variable DataMemory[1024];
 
 public:
-
-	void ReadFile(std::string filename);
+	SIM();
+	void ReadFile();
+	~SIM();
 };
 
 

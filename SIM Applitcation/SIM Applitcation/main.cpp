@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <conio.h>
 #include <stdlib.h>
 #include <Windows.h>
@@ -18,6 +17,8 @@ int main()
 	MoveWindow(console, r.left, r.top, 800, 400, true);
 
 	DisplayMessage();
+	SIM *Application = new SIM();
+	Application->ReadFile();
 
 	//Skeleton Code...
 	//Functionality will be encapsulated in SIM class.

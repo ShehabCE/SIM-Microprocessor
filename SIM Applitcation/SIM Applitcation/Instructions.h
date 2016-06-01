@@ -1,13 +1,14 @@
 #include <string>
+#include "DataMemory.h"
 #define INSTRUCTIONS_H
 #if defined INSTRUCTIONS_H
 
 
 //An abstract class with all possible (undefined) functionality of an instruction.
 //Each derived class will inherit from that abstract class and redefine the methods inside to express certain functionality.
-class InstructionType
+class InstructionType : public DM
 {
-private:
+protected:
 	int operand1, operand2, operand3;
 	std::string Variable_name;
 	int result;
@@ -20,7 +21,11 @@ public:
 };
 
 class ADD : public InstructionType
-{};
+{
+public:
+	ADD(int, int);
+	~ADD();
+};
 class MUL : public InstructionType
 {};
 class SUB : public InstructionType
