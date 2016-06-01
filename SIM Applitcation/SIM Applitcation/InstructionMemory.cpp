@@ -1,24 +1,31 @@
 #include "InstructionMemory.h"
 #include <iostream>
-
+#include <iomanip>
 IM::IM() 
 {
 	Locations.resize(1025);
 };
 
-void IM::LoadToInstructionMemory(std::string instr)
+void IM::LoadToInstructionMemory(int* index, std::string instr)
 {
-	Locations[InstructionCount] = instr;
-	InstructionCount++;
+	Locations[*index] = instr;
+}
+
+std::string IM::LoadFromInstructionMemory(int* index)
+{
+	if(!(Locations[*index].empty()))
+		return Locations[*index];		//Making sure it returns an actual instruction.
 }
 
 void IM::DisplayIM()
 {
-	for (int i = 0; i <= InstructionCount; i++)
+	std::cout << "----------------------------------------------------------------------------" << std::endl;
+	for (int i = 0; i < 1024; i++)
 	{
 		if (!(Locations[i].empty()))
-			std::cout << i << "| " << Locations[i] << std::endl;
+			std::cout << i << "| " << std::setprecision(5) << std::fixed << Locations[i] << std::endl;
 	}
+	std::cout << "----------------------------------------------------------------------------" << std::endl;
 }
 
 IM::~IM()

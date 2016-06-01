@@ -22,6 +22,7 @@ int main()
 	{
 		SIM Application = SIM();
 		Application.ReadFile();
+//		Application.Execute();
 	}
 	catch (exception& e)
 	{

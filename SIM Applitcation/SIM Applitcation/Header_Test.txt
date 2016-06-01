@@ -1,4 +1,8 @@
 S.I.M. 1.5
 
-
-Just a header above. No Instruction file yet. (Won't parse this line)
+(Below are sample of instructions)(Not executable yet)
+ADD A,0,0
+ADD A,B,A
+ADD C,B,B
+NEG B
+ADD D,B,A

@@ -2,8 +2,13 @@
 
 SIM::SIM()
 {
-	SIM_IM =  &IM();		//SIM's Instruction Memory.
-	SIM_DM =  &DM();		//SIM's Data Memory.
+	//std::map <std::string, ADD*> HashTable;
+	//HashTable["ADD"] = new ADD();
+	//InstrEntry = { "ADD", "SUB", "MUL", "NEG", "JUMP", "JUMP0", "ASSIGN", "LESS", "LARGER", "EQUAL", "READ", "WRITE", "HALT" };
+	//std::cout << "SIM Object insantiated." << std::endl;
+	//InstructionCount = &count;
+	//SIM_IM =  &IM();		//SIM's Instruction Memory.
+	//SIM_DM =  &DM();		//SIM's Data Memory.
 };
 
 void SIM::ReadFile()
@@ -39,7 +44,10 @@ void SIM::ReadFile()
 	while (!File.eof())
 	{
 		getline(File, line);
-		SIM_IM->LoadToInstructionMemory(line);
+		if (line.empty())
+			continue;		//Skip empty lines.
+		SIM_IM->LoadToInstructionMemory(InstructionCount, line);
+		(*InstructionCount)++;
 	}
 
 	std::cout << "Want to check the Instruction Memory? (Y/N)" << std::endl;
@@ -48,5 +56,22 @@ void SIM::ReadFile()
 		SIM_IM->DisplayIM();
 };
 
+void SIM::Execute()
+{
+	std::string CurrentInstruction;
+	for (int j = 0; j < *InstructionCount; j++)
+	{
+		CurrentInstruction = SIM_IM->LoadFromInstructionMemory[*InstructionCount];
+		//Got an instruction. Check first word? If valid, read operands corresponding to instruction. (Handle errors).
+		//Each instruction will be instantiated once in the SIM constructor.
+		//Whenever there is a match, use Instruction.Execute() method.
+		//Else, print a nonsense statement. 
+		//Use unordered_map ??
+	}
+}
+
 SIM::~SIM()
-{};
+{
+	//delete SIM_IM, SIM_DM, InstructionCount;
+	//delete []InstrEntry;
+};

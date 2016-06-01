@@ -6,13 +6,13 @@
 class IM
 {
 private:
-	int InstructionCount = 0;
 	std::vector<std::string> Locations;
 
 
 public:
 	IM();
-	void LoadToInstructionMemory(std::string);
+	void LoadToInstructionMemory(int*, std::string);
+	std::string LoadFromInstructionMemory(int*);
 	//LoadToInstructionMemory
 	//ReadFromInstructionMemory
 	//AccessToInstructionMemory
