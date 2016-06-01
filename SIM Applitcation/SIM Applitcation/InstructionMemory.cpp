@@ -3,7 +3,7 @@
 
 IM::IM() 
 {
-	InstructionCount = 0;
+	Locations.resize(1025);
 };
 
 void IM::LoadToInstructionMemory(std::string instr)
@@ -17,7 +17,7 @@ void IM::DisplayIM()
 	for (int i = 0; i <= InstructionCount; i++)
 	{
 		if (!(Locations[i].empty()))
-			std::cout << Locations[i] << std::endl;
+			std::cout << i << "| " << Locations[i] << std::endl;
 	}
 }
 

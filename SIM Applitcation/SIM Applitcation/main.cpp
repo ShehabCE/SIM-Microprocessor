@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <exception>
 
 #include "SIM_Microprocessor.h"
 
@@ -17,12 +18,18 @@ int main()
 	MoveWindow(console, r.left, r.top, 800, 400, true);
 
 	DisplayMessage();
-	SIM *Application = new SIM();
-	Application->ReadFile();
+	try
+	{
+		SIM Application = SIM();
+		Application.ReadFile();
+	}
+	catch (exception& e)
+	{
+		cout << "Exception Caught! Error: " << e.what() << " :(" << endl;
+	}
 
 	//Skeleton Code...
 	//Functionality will be encapsulated in SIM class.
-
 
 
 	return 0;

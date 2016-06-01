@@ -1,7 +1,10 @@
 #include "SIM_Microprocessor.h"
 
 SIM::SIM()
-{};
+{
+	SIM_IM =  &IM();		//SIM's Instruction Memory.
+	SIM_DM =  &DM();		//SIM's Data Memory.
+};
 
 void SIM::ReadFile()
 {
@@ -36,13 +39,13 @@ void SIM::ReadFile()
 	while (!File.eof())
 	{
 		getline(File, line);
-		SIM::IM::LoadToInstructionMemory(line);
+		SIM_IM->LoadToInstructionMemory(line);
 	}
 
 	std::cout << "Want to check the Instruction Memory? (Y/N)" << std::endl;
 	std::cin >> keyword;
 	if (keyword == 'Y' || keyword == 'y')
-		SIM::IM::DisplayIM();
+		SIM_IM->DisplayIM();
 };
 
 SIM::~SIM()

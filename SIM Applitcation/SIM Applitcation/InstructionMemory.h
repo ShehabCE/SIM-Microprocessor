@@ -1,13 +1,13 @@
 #include <string>
+#include <vector>
 #define INSTRUCTIONMEMORY_H
 #if defined INSTRUCTIONMEMORY_H
 
 class IM
 {
-protected:
-	int address;
-	int InstructionCount;
-	std::string Locations[1024];
+private:
+	int InstructionCount = 0;
+	std::vector<std::string> Locations;
 
 
 public:

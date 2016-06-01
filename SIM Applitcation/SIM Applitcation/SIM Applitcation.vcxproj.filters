@@ -27,6 +27,9 @@
     <ClCompile Include="SIM_Microprocessor.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataMemory.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Instructions.h">
@@ -41,5 +44,10 @@
     <ClInclude Include="DataMemory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Header_Test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

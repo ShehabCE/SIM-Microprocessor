@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataMemory.cpp" />
     <ClCompile Include="InstructionMemory.cpp" />
     <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
@@ -156,6 +157,9 @@
     <ClInclude Include="InstructionMemory.h" />
     <ClInclude Include="Instructions.h" />
     <ClInclude Include="SIM_Microprocessor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Header_Test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
