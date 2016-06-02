@@ -58,10 +58,31 @@ void SIM::ReadFile()
 
 void SIM::Execute()
 {
+	int cursor = 0;	int SizeOfIM = count;
 	std::string CurrentInstruction;
-	for (int j = 0; j < *InstructionCount; j++)
+	std::string operation ="", operand1, operand2, operand3;
+	for (int j = 0; j < SizeOfIM; j++)
 	{
-		CurrentInstruction = SIM_IM->LoadFromInstructionMemory[*InstructionCount];
+		CurrentInstruction = SIM_IM->LoadFromInstructionMemory(j);
+		while (1)
+		{
+			if (operation.empty())
+				operation = CurrentInstruction[cursor];
+			else
+				operation += CurrentInstruction[cursor];
+			cursor++;
+			if (CurrentInstruction[cursor] == ' ')
+				break;
+		}
+		while (CurrentInstruction[cursor] != ',')
+		{
+			if (operand1.empty())
+				operand1 = CurrentInstruction[cursor];
+			else
+				operand1 += CurrentInstruction[cursor];
+			cursor++;
+		}
+		std::cout << "Hello" << std::endl;
 		//Got an instruction. Check first word? If valid, read operands corresponding to instruction. (Handle errors).
 		//Each instruction will be instantiated once in the SIM constructor.
 		//Whenever there is a match, use Instruction.Execute() method.

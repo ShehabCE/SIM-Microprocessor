@@ -3,11 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include <regex>
-#include <map>
 
 #include "InstructionMemory.h"
 #include "DataMemory.h"
-#include "Instructions.h"
+//#include "Instructions.h"
 
 #define SIM_MICROPROCESSOR_H
 #if defined SIM_MICROPROCESSOR_H

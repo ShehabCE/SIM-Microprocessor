@@ -1,5 +1,7 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <iomanip>
 #define INSTRUCTIONMEMORY_H
 #if defined INSTRUCTIONMEMORY_H
 
@@ -12,7 +14,7 @@ private:
 public:
 	IM();
 	void LoadToInstructionMemory(int*, std::string);
-	std::string LoadFromInstructionMemory(int*);
+	std::string LoadFromInstructionMemory(int);
 	//LoadToInstructionMemory
 	//ReadFromInstructionMemory
 	//AccessToInstructionMemory

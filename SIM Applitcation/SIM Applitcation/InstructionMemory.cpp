@@ -1,6 +1,5 @@
 #include "InstructionMemory.h"
-#include <iostream>
-#include <iomanip>
+
 IM::IM() 
 {
 	Locations.resize(1025);
@@ -11,10 +10,10 @@ void IM::LoadToInstructionMemory(int* index, std::string instr)
 	Locations[*index] = instr;
 }
 
-std::string IM::LoadFromInstructionMemory(int* index)
+std::string IM::LoadFromInstructionMemory(int index)
 {
-	if(!(Locations[*index].empty()))
-		return Locations[*index];		//Making sure it returns an actual instruction.
+	if(!(Locations[index].empty()))
+		return Locations[index];		//Making sure it returns an actual instruction.
 }
 
 void IM::DisplayIM()

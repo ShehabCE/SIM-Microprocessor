@@ -1,6 +1,5 @@
 S.I.M. 1.5
 
-(Below are sample of instructions)(Not executable yet)
 ADD A,0,0
 ADD A,B,A
 ADD C,B,B

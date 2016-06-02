@@ -19,6 +19,8 @@ private:
 public:
 	DM();
 	void DisplayDM();
+	int ReadFromDataMemory(std::string);
+	void WriteToDataMemory(std::string, int);
 	//ReadFromDataMemory
 	//WriteToDataMemory
 	~DM();
