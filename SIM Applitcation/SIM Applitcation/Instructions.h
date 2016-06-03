@@ -19,35 +19,61 @@ public:
 	//virtual int ReadFromInstructionMemory(std::string) = 0;
 };
 
-class ADD : public InstructionType
+class ADD 
 {
+private:
+	std::string in1, in2, out;
+	int result;
 public:
-	ADD(int, int);
+	ADD();
+	int Perform(std::string, std::string);
 	~ADD();
 };
-class MUL : public InstructionType
+
+class MUL 
+{
+private:
+	std::string in1, in2, out;
+	int result;
+public:
+	MUL();
+	int Perform(std::string, std::string);
+	~MUL();
+};
+
+class SUB 
+{
+private:
+	std::string in1, in2, out;
+	int result;
+public:
+	SUB();
+	int Perform(std::string, std::string);
+	~SUB();
+};
+class NEG 
+{
+private:
+	std::string in1, out;
+	int result;
+public:
+	NEG();
+	~NEG();
+};
+class JMP 
 {};
-class SUB : public InstructionType
+class JMP0 
 {};
-class NEG : public InstructionType
+class ASSIGN 
 {};
-class JUMP : public InstructionType
+class LESS 
 {};
-class JUMP0 : public InstructionType
+class LARGER 
 {};
-class ASSIGN : public InstructionType
+class ISEQUAL 
 {};
-class LESS : public InstructionType
+class READ 
 {};
-class LARGER : public InstructionType
-{};
-class ISEQUAL : public InstructionType
-{};
-class READ : public InstructionType
-{};
-class WRITE : public InstructionType
-{};
-//HALT is a bit useless here. Keep it for the time being.
-class HALT : public InstructionType
+class WRITE
 {};
 #endif

@@ -14,6 +14,7 @@ struct variable
 class DM
 {
 private:
+	int DataMemory_Pointer;
 	std::vector<variable> MemoryBank;
 
 public:
@@ -21,8 +22,8 @@ public:
 	void DisplayDM();
 	int ReadFromDataMemory(std::string);
 	void WriteToDataMemory(std::string, int);
-	//ReadFromDataMemory
-	//WriteToDataMemory
+	bool CheckVariableInDM(std::string);
+	void OverwriteVariable(std::string, int);
 	~DM();
 };
 

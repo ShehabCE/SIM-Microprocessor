@@ -5,7 +5,7 @@ IM::IM()
 	Locations.resize(1025);
 };
 
-void IM::LoadToInstructionMemory(int* index, std::string instr)
+void IM::Inject_To_InstructionMemory(int* index, std::string instr)
 {
 	Locations[*index] = instr;
 }

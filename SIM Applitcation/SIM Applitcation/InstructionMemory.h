@@ -13,7 +13,7 @@ private:
 
 public:
 	IM();
-	void LoadToInstructionMemory(int*, std::string);
+	void Inject_To_InstructionMemory(int*, std::string);
 	std::string LoadFromInstructionMemory(int);
 	//LoadToInstructionMemory
 	//ReadFromInstructionMemory

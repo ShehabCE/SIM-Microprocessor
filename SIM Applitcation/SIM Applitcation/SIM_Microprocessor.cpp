@@ -7,13 +7,18 @@ void ReadOneOperand(std::string, int&, std::string&);
 
 SIM::SIM()
 {
-	//std::map <std::string, ADD*> HashTable;
-	//HashTable["ADD"] = new ADD();
-	//InstrEntry = { "ADD", "SUB", "MUL", "NEG", "JUMP", "JUMP0", "ASSIGN", "LESS", "LARGER", "EQUAL", "READ", "WRITE", "HALT" };
-	//std::cout << "SIM Object insantiated." << std::endl;
-	//InstructionCount = &count;
-	//SIM_IM =  &IM();		//SIM's Instruction Memory.
-	//SIM_DM =  &DM();		//SIM's Data Memory.
+	ADD Instr_ADD =			ADD();
+	SUB Instr_SUB =			SUB();
+	MUL Instr_MUL =			MUL();
+	NEG Instr_NEG =			NEG();
+	JMP Instr_JMP =			JMP();
+	JMP0 Instr_JMP0 =		JMP0();
+	ASSIGN Instr_ASSIGN =	ASSIGN();
+	LESS Instr_LESS =		LESS();
+	LARGER Instr_LARGER =	LARGER();
+	ISEQUAL Instr_EQUAL =	ISEQUAL();
+	READ Instr_READ =		READ();
+	WRITE Instr_WRITE =		WRITE();
 };
 
 void SIM::ReadFile()
@@ -51,7 +56,7 @@ void SIM::ReadFile()
 		getline(File, line);
 		if (line.empty())
 			continue;		//Skip empty lines.
-		SIM_IM->LoadToInstructionMemory(InstructionCount, line);
+		SIM_IM->Inject_To_InstructionMemory(InstructionCount, line);
 		(*InstructionCount)++;
 	}
 
@@ -105,6 +110,7 @@ void SIM::Execute()
 		case 7:
 		case 8:
 		case 9:
+			ReadTwoOperands(CurrentInstruction, cursor, operand1, operand3);
 			//Call 2 operands read function.
 			//To do.
 			break;
@@ -112,6 +118,7 @@ void SIM::Execute()
 		case 10:
 		case 11:
 		case 12:
+			ReadOneOperand(CurrentInstruction, cursor, operand3);
 			//Call  operands read function.
 			//To do.
 			break;
