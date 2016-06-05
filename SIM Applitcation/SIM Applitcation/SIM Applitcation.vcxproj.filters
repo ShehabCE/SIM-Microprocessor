@@ -49,5 +49,8 @@
     <Text Include="Header_Test.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Opcode.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

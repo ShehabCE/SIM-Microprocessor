@@ -8,16 +8,13 @@
 class IM
 {
 private:
+	int PC;
 	std::vector<std::string> Locations;
-
-
 public:
 	IM();
-	void Inject_To_InstructionMemory(int*, std::string);
+	void Inject_To_InstructionMemory(std::string);
 	std::string LoadFromInstructionMemory(int);
-	//LoadToInstructionMemory
-	//ReadFromInstructionMemory
-	//AccessToInstructionMemory
+	int GetPC();
 	void DisplayIM();
 	~IM();
 };

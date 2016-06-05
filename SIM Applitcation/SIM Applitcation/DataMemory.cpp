@@ -2,7 +2,7 @@
 
 DM::DM(): DataMemory_Pointer(0)
 {
-	MemoryBank.resize(1025);
+	MemoryBank.resize(1024);
 };
 
 void DM::DisplayDM()
@@ -16,11 +16,15 @@ void DM::DisplayDM()
 
 int DM::ReadFromDataMemory(std::string S)
 {
-	for (int i = 0; i < 1024; i++)
+	if (CheckVariableInDM(S))
 	{
-		if (MemoryBank[i].name == S)
-			return MemoryBank[i].value;
+		for (int i = 0; i < 1024; i++)
+		{
+			if (MemoryBank[i].name == S)
+				return MemoryBank[i].value;
+		}
 	}
+	else std::cerr << "**ERROR: Variable not found in Data Memory." << std::endl;
 }
 
 bool DM::CheckVariableInDM(std::string A)
@@ -46,11 +50,10 @@ void DM::WriteToDataMemory(std::string X, int Y)
 		else
 		{
 			OverwriteVariable(X, Y);
-
 		}
 	}
 	else
-		std::cerr << "Data Memory is full! Cannot add new variable." << std::endl;
+		std::cerr << "**ERROR: Data Memory is full! Cannot add new variable." << std::endl;
 }
 
 void DM::OverwriteVariable(std::string var, int val)

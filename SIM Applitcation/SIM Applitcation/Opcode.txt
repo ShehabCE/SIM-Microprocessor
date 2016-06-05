@@ -1,0 +1,33 @@
+	
+	
+	
+	if (S == "ADD")
+		OperationNumber = 1;
+	else if (S == "SUB")
+		OperationNumber = 2;
+	else if (S == "MUL")
+		OperationNumber = 3;
+	else if (S == "LESS")
+		OperationNumber = 4;
+	else if (S == "LARGER")
+		OperationNumber = 5;
+	else if (S == "EQUAL")
+		OperationNumber = 6;
+	//Start of Two Operand-Instructions.
+	else if (S == "NEG")
+		OperationNumber = 7;
+	else if (S == "JMP0")
+		OperationNumber = 8;
+	else if (S == "ASSIGN")
+		OperationNumber = 9;
+	//Start of One Operand-Instructions.
+	else if (S == "JMP")
+		OperationNumber = 10;
+	else if (S == "READ")
+		OperationNumber = 11;
+	else if (S == "WRITE")
+		OperationNumber = 12;
+	else if (S == "HALT")
+		OperationNumber = 13;
+	else 
+		OperationNumber = 100;		//What kind of sorcery is this!

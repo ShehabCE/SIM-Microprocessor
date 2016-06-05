@@ -6,20 +6,7 @@ void ReadTwoOperands(std::string, int&, std::string&, std::string&);
 void ReadOneOperand(std::string, int&, std::string&);
 
 SIM::SIM()
-{
-	ADD Instr_ADD =			ADD();
-	SUB Instr_SUB =			SUB();
-	MUL Instr_MUL =			MUL();
-	NEG Instr_NEG =			NEG();
-	JMP Instr_JMP =			JMP();
-	JMP0 Instr_JMP0 =		JMP0();
-	ASSIGN Instr_ASSIGN =	ASSIGN();
-	LESS Instr_LESS =		LESS();
-	LARGER Instr_LARGER =	LARGER();
-	ISEQUAL Instr_EQUAL =	ISEQUAL();
-	READ Instr_READ =		READ();
-	WRITE Instr_WRITE =		WRITE();
-};
+{};
 
 void SIM::ReadFile()
 {
@@ -56,10 +43,10 @@ void SIM::ReadFile()
 		getline(File, line);
 		if (line.empty())
 			continue;		//Skip empty lines.
-		SIM_IM->Inject_To_InstructionMemory(InstructionCount, line);
-		(*InstructionCount)++;
+		SIM_IM->Inject_To_InstructionMemory(line);
 	}
 
+	InstructionsCount = SIM_IM->GetPC();			//Size of my Instruction Memory.
 	std::cout << "Want to check the Instruction Memory? (Y/N)" << std::endl;
 	std::cin >> keyword;
 	if (keyword == 'Y' || keyword == 'y')
@@ -68,15 +55,17 @@ void SIM::ReadFile()
 
 void SIM::Execute()
 {
+	int int_operand2 = 0, int_operand3 = 0, int_operand1 = 0;
 	int OPCODE;
-	int cursor = 0;	int SizeOfIM = count;
+	int cursor = 0;	int SizeOfIM = InstructionsCount;
 	std::string CurrentInstruction;
 	std::string operation;
 	std::string operand1, operand2, operand3;
 
+	//The following loop is the execution of Instruction and Writing to Data Memory.
 	for (int j = 0; j < SizeOfIM; j++)		//Looping through the Whole Instruction Memory till the end.
 	{
-		CurrentInstruction = SIM_IM->LoadFromInstructionMemory(j);
+		CurrentInstruction = SIM_IM->LoadFromInstructionMemory(j);		//Fetch Instruction.
 		//This block of code is reading the operation type and stores it in operation variable.
 		while (1)
 		{
@@ -85,7 +74,7 @@ void SIM::Execute()
 			else
 				operation += CurrentInstruction[cursor];
 			cursor++;
-			if (CurrentInstruction[cursor] == ' ')
+			if (CurrentInstruction[cursor] == ' ')	
 			{
 				cursor++;
 				break;
@@ -95,41 +84,185 @@ void SIM::Execute()
 		//Calling a function to read the operands based on what type of instruction it is.
 		switch (OPCODE)
 		{
-
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 1:
+			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+			
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_ADD->Perform(int_operand2,int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+
+			break;
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 2:
+			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_SUB->Perform(int_operand2, int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+			//SUB
+
+			break;
+
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 3:
+			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
+			//MUL
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_MUL->Perform(int_operand2, int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 4:
+			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
+			//LARGER
+
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_LARGER->Perform(int_operand2, int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 5:
+			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
+			//LESS
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_LESS->Perform(int_operand2, int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 6:
 			ReadThreeOperands(CurrentInstruction, cursor, operand1, operand2, operand3);
-			//Call 3 operands read function.
-			//To do.
+			//ISEQUAL
+
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			if (isdigit(operand3[0]))
+				int_operand3 = operand3[0] - '0';
+			else
+				int_operand3 = SIM_DM->ReadFromDataMemory(operand3);
+
+			int_operand1 = Instr_EQUAL->Perform(int_operand2, int_operand3);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+			
 			break;
-		
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 7:
+			ReadTwoOperands(CurrentInstruction, cursor, operand1, operand2);
+			//NEG
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
+
+			int_operand1 = Instr_NEG->Perform(int_operand2);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 8:
+			ReadTwoOperands(CurrentInstruction, cursor, operand1, operand2);
+			//JMP0
+			int_operand2 = stoi(operand2);
+			int_operand1 = SIM_DM->ReadFromDataMemory(operand1);
+			if (int_operand1 == 0)
+				if (int_operand2 > 0 && int_operand2 <= SizeOfIM)
+					j = int_operand1;
+				else std::cerr << "**ERROR: Jump Addres out of Range!." << std::endl;
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 9:
-			ReadTwoOperands(CurrentInstruction, cursor, operand1, operand3);
-			//Call 2 operands read function.
-			//To do.
+			ReadTwoOperands(CurrentInstruction, cursor, operand1, operand2);
+			//ASSIGN
 			break;
+			if (isdigit(operand2[0]))
+				int_operand2 = operand2[0] - '0';		//Convert from '9' to 9.
+			else
+				int_operand2 = SIM_DM->ReadFromDataMemory(operand2);
 
+			int_operand1 = Instr_ASSIGN->Perform(int_operand2);
+			SIM_DM->WriteToDataMemory(operand1, int_operand1);
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 10:
-		case 11:
-		case 12:
-			ReadOneOperand(CurrentInstruction, cursor, operand3);
-			//Call  operands read function.
-			//To do.
+			ReadOneOperand(CurrentInstruction, cursor, operand1);
+			//JMP
+			int_operand1 = stoi(operand1);
+			if (int_operand1 > 0 && int_operand1 <= SizeOfIM)
+				j = int_operand1;		//assigned the new address to iterator to fetch.
+			else std::cerr << "**ERROR: Jump Addres out of Range!." << std::endl;
 			break;
-
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+		case 11:
+			ReadOneOperand(CurrentInstruction, cursor, operand1);
+			//READ
+			int_operand1 = Instr_READ->Perform(operand1);
+			SIM_DM->WriteToDataMemory(operand1, (int)int_operand1);
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+		case 12:
+			ReadOneOperand(CurrentInstruction, cursor, operand1);
+			//WRITE
+			std::cout << operand1 << " = " << SIM_DM->ReadFromDataMemory << std::endl;
+			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		case 13:
 			//Halt
+			std::cout << "Halt!" << std::endl;
 			break;
-		
-		default:
+			///////////////////////////////////////////////////////////////////////////////////////////////////
+		case 100:
 			std::cerr << "Unidentified Instruction Type." << std::endl;
 			break;
+			///////////////////////////////////////////////////////////////////////////////////////////////////
 		}
 		// ADD A,B,0
 		//Example: operation = "ADD"	operand1 = "A"	operand2 = "B"	operand3 = "0"
@@ -139,7 +272,8 @@ void SIM::Execute()
 
 SIM::~SIM()
 {
-	//delete SIM_IM, SIM_DM, InstructionCount;
+	delete SIM_IM, SIM_DM, Instr_ADD, Instr_SUB, Instr_MUL, Instr_LARGER, 
+		Instr_LESS, Instr_EQUAL, Instr_ASSIGN, Instr_NEG, Instr_READ;
 	//delete []InstrEntry;
 };
 
@@ -174,7 +308,12 @@ int Lookup(std::string S)
 		OperationNumber = 11;
 	else if (S == "WRITE")
 		OperationNumber = 12;
-	else return 13;		//HALT.
+	else if (S == "HALT")
+		OperationNumber = 13;
+	else 
+		OperationNumber = 100;		//What kind of sorcery is this!
+
+	return OperationNumber;		
 
 }
 

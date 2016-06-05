@@ -1,19 +1,35 @@
 #include "InstructionMemory.h"
 
-IM::IM() 
+IM::IM(): PC(0)
 {
-	Locations.resize(1025);
+	Locations.resize(1024);
 };
 
-void IM::Inject_To_InstructionMemory(int* index, std::string instr)
+void IM::Inject_To_InstructionMemory(std::string instr)
 {
-	Locations[*index] = instr;
+	if (PC < 1024)
+	{
+		Locations[PC] = instr;
+		PC++;
+	}
+	else
+		std::cerr << "**ERROR: Instruction Memory full! Cannot add more instructions." << std::endl;
+
 }
 
 std::string IM::LoadFromInstructionMemory(int index)
 {
-	if(!(Locations[index].empty()))
-		return Locations[index];		//Making sure it returns an actual instruction.
+	if (index < 1024)
+	{
+		if (!(Locations[index].empty()))
+			return Locations[index];		//Making sure it returns an actual instruction.
+	}
+	std::cerr << "**ERROR: index of Instruction Memory went out of range!." << std::endl;
+}
+
+int IM::GetPC()
+{
+	return PC;
 }
 
 void IM::DisplayIM()
@@ -28,4 +44,6 @@ void IM::DisplayIM()
 }
 
 IM::~IM()
-{};
+{
+	Locations.shrink_to_fit();		//Forcing to release memory allocated to vector.
+};
